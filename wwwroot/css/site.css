@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.center-table {
+    border-collapse: separate;
+    border-spacing: 10px; /* Задает расстояние между столбцами */
+}
