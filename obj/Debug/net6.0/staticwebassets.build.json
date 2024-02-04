@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C3636rPTXFd1A9yuXBInrGmXOFtv7Hk6p8YR1nwsiDQ=",
+  "Hash": "9piTPCpLl0sT6rY6cav7k0QY+Fguhi8P2q08idKQCpg=",
   "Source": "WebApiFridges.CLIENT",
   "BasePath": "_content/WebApiFridges.CLIENT",
   "Mode": "Default",
@@ -93,12 +93,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\wwwroot\\js\\site.js",
+      "Identity": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\wwwroot\\js\\JavaScript.js",
       "SourceId": "WebApiFridges.CLIENT",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\wwwroot\\",
       "BasePath": "_content/WebApiFridges.CLIENT",
-      "RelativePath": "js/site.js",
+      "RelativePath": "js/JavaScript.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -109,7 +109,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
+      "OriginalItemSpec": "wwwroot\\js\\JavaScript.js"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

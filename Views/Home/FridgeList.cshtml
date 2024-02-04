@@ -1,6 +1,13 @@
 ﻿@using WebApiFridges.CLIENT.MyResponceClasses;
 @model List<ResponceFridges>
 
+<script src="~/js/JavaScript.js"></script>
+
+@{
+	ViewData["Title"] = "FridgeList";
+	string url = @ViewData["ApiString"] + "/Fridges";
+}
+
 <h1>Список холодильников</h1>
 
 <h6>
@@ -30,7 +37,16 @@
 			<td>@item.Year</td>
 			<td>@item.Name</td>
 			<td>@item.OwnerName</td>
-			<td><a href="">Удалить</a></td>
+			<td>
+				<button onclick="openModal(
+				{
+					url: '@url',
+					guid:'@item.Guid'
+				}
+				)">
+					Удалить
+				</button>
+			</td>
 		</tr>
 	}
 </table>
