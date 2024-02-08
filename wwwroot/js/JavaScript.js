@@ -1,56 +1,37 @@
 ﻿function openModal(params) {
     const url = params.url;
     const guid = params.guid;
-    const name = params.name;
     // селектор jQuery
-    const modal = $("#modal-confirmation");
+    const modal = $("#myModal");
+    const buttonOk = $("#buttonOk");
+    const buttonClose = $("#buttonClose");
 
     if (url === undefined || guid === undefined) {
         alert("Произошла ошибка!");
         return;
     }
 
-    modal.find(".modal-body").html(`<p>Вы действительно хотите удалить ${name}?<p>`);
-    modal.modal('show');
-
-    const buttonRemove = modal.find("#buttonRemove");
-    const buttonClose = modal.find("#buttonClose");
-    const buttonClose2 = modal.find("#buttonClose2");
-
-    buttonClose.click(function () {
-        closeModal(modal);
-    });
-
-    buttonClose2.click(function () {
-        closeModal(modal);
-    });
-
-    buttonRemove.click(function () {
-        // Ваш код обработки события клика на кнопку
-        removeObject(url, guid, modal);
-    });
+    modal.modal("show");
 }
-
-function removeObject(url, guid, modal) {
-    //метод jQuery для асинхронного http запроса к серверу
+function removeObject() {
+    // метод jQuery для асинхронного http запроса к серверу
     $.ajax({
         type: "DELETE",
-        url: url + "/" + guid,
+        url: url,
+        data: { "guid": guid },
         success:
-            function (response) {
+            function () {
                 modal.modal("hide");
-                console.log(response);
-                location.reload();
             },
+        //failure:
+        //    function () {
+
+        //    },
         error:
-            function (response) {
-                alert("Произошла ошибка при запросе к серверу!");
-                console.log(response);
+            function () {
             }
     });
-
-    closeModal(modal);
 }
-function closeModal(modal) {
-    $(modal).modal('hide');
+function closeModal() {
+    modal.modal("hide");
 }

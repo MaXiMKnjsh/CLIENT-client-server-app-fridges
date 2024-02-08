@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1>Error</h1>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="error-message">@Model.Error</div>
+}
