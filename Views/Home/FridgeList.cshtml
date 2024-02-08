@@ -1,37 +1,91 @@
 ﻿@using WebApiFridges.CLIENT.MyResponceClasses;
 @model List<ResponceFridges>
 
+<<<<<<< Updated upstream
 <h1>Список холодильников</h1>
+=======
+@{
+	ViewData["Title"] = "Список холодильников";
+	string url = @ViewData["ApiString"] + "/Fridges";
+}
 
-<h6>
-	Вы также можете
-	<a href="@Url.Action("CreateFridge", "Home")">
-		добавить
-	</a>
-	или
-	<a href="@Url.Action("EditFridge", "Home")">
-		отредактировать
-	</a>
-	список.
-</h6>
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="~/js/JavaScript.js" defer></script>
+</head>
+<body>
+	<h1>Список холодильников</h1>
+>>>>>>> Stashed changes
 
-<table class="center-table">
-	<tr>
-		<th>Модель</th>
-		<th>Год производства</th>
-		<th>Название</th>
-		<th>Владелец</th>
-		<th></th>
-	</tr>
-	@foreach (var item in Model)
-	{
+	<h6>
+		Вы также можете
+		<a href="@Url.Action("CreateFridge", "Home")">
+			добавить
+		</a>
+		или
+		<a href="@Url.Action("EditFridge", "Home")">
+			отредактировать
+		</a>
+		список.
+	</h6>
+
+	<table id="myTable" class="table">
 		<tr>
+<<<<<<< Updated upstream
 			<td>@item.Model</td>
 			<td>@item.Year</td>
 			<td>@item.Name</td>
 			<td>@item.OwnerName</td>
 			<td><a href="">Удалить</a></td>
+=======
+			<th>Модель</th>
+			<th>Год производства</th>
+			<th>Название</th>
+			<th>Владелец</th>
+			<th></th>
+>>>>>>> Stashed changes
 		</tr>
-	}
-</table>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Model</td>
+				<td>@item.Year</td>
+				<td>@item.Name</td>
+				<td>@item.OwnerName</td>
+				<td>
+					<button class="btn btn-primary" onclick="openModal(
+					{
+						url: '@url',
+						guid: '@item.Guid',
+						name: '@item.Name'
+					})">
+						Удалить
+					</button>
+				</td>
+			</tr>
+		}
+	</table>
 
+	<div class="modal" id="modal-confirmation" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Подтверждение действия</h5>
+					<button id="buttonClose2" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button id="buttonRemove" type="button" class="btn btn-primary">Удалить</button>
+					<button id="buttonClose" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

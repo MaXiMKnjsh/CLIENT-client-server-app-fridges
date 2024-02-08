@@ -12,13 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebApiFridges.CLIENT")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< Updated upstream
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c41ff92d00d6b68ecd9dfff9018f5efda70488a")]
-=======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c4f6af3a0cbba4d4cb84620cfb3784f4649d4e4")]
->>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("WebApiFridges.CLIENT")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebApiFridges.CLIENT")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
