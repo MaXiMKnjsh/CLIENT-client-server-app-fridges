@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "B8vuZYbJJOn8jxirmteRPF1JWAy4YtIBK9sRDozcfP6xNt1ONJkMh5xZ/qKYns4Tx6MwHdCjpQc19BNmbSThKw==",
+  "dgSpecHash": "H7zoaJuowoqtvPa4rLvwSkbbR3H+iCzyKQeILMnz1eexZy/nHlEryyjgBIiQVfkUbfH5ShrBMsdfGVPL5FjPmA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\WebApiFridges.CLIENT.csproj",
+  "projectFilePath": "C:\\Users\\User\\Desktop\\copy\\WebApiFridges.CLIENT.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

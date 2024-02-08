@@ -9549,11 +9549,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\WebApiFridges.CLIENT.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\copy\\WebApiFridges.CLIENT.csproj",
       "projectName": "WebApiFridges.CLIENT",
-      "projectPath": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\WebApiFridges.CLIENT.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\copy\\WebApiFridges.CLIENT.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\CLIENT-client-server-app-fridges\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\copy\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
