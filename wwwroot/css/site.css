@@ -16,3 +16,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-class {
+    margin: 0;
+    width: 500px;
+}
+
+form > * {
+    margin-bottom: 0.5rem;
+}
+
+.my-button{
+    margin-bottom: 5px;
+}

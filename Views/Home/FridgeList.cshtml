@@ -1,23 +1,22 @@
 ﻿@using WebApiFridges.CLIENT.MyResponceClasses;
-@model List<ResponceFridges>
 
 @{
-	ViewData["Title"] = "Список холодильников";
-	string url = @ViewData["ApiString"] + "/Fridges";
+	string url = ViewData["ApiString"] + "/Fridges";
+	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="~/js/JavaScript.js" defer></script>
+	<meta charset="UTF-8">
+	<script src="~/js/FridgeListJS.js" defer></script>
 </head>
 <body>
 	<h1>Список холодильников</h1>
 	<h6>
 		Вы также можете
 		<a href="@Url.Action("CreateFridge", "Home")">
-			добавить
+			добавить объект
 		</a>
 		или
 		<a href="@Url.Action("EditFridge", "Home")">
@@ -34,7 +33,7 @@
 			<th>Владелец</th>
 			<th></th>
 		</tr>
-		@foreach (var item in Model)
+		@foreach (var item in fridgesList)
 		{
 			<tr>
 				<td>@item.Model</td>
@@ -43,11 +42,11 @@
 				<td>@item.OwnerName</td>
 				<td>
 					<button class="btn btn-primary" onclick="openModal(
-					{
+						{
 						url: '@url',
 						guid: '@item.Guid',
 						name: '@item.Name'
-					})">
+						})">
 						Удалить
 					</button>
 				</td>
@@ -73,6 +72,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

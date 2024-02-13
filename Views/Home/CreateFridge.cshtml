@@ -1,7 +1,56 @@
-﻿
+﻿@using WebApiFridges.CLIENT.MyResponceClasses;
+
 @{
-    ViewData["Title"] = "CreateFridge";
+	var models = ViewData["ModelsList"] as List<ResponceFridgeModels>;
+	var products = ViewData["ProductsList"] as List<ResponceProducts>;
 }
 
-<h1>CreateFridge</h1>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="~/js/CreateFridgeJS.js" defer></script>
+</head>
+<body>
+	<h3>Заполни форму ниже, чтобы добавить холодильник в список.</h3>
+	<form action="https://localhost:7196/api/Fridges" method="get" class="form-class">
+		<div>
+			<label for="description">Название/описание *</label>
+			<input class="form-control" type="text" name="description" id="description" required>
+		</div>
+		<div>
+			<label for="owner">Владелец</label>
+			<input class="form-control" type="text" name="owner" id="owner">
+		</div>
+		@if (models != null)
+		{
+			<div>
+				<label for="model">Модель холодильника</label>
+				<select class="form-control" name="model" id="model" required>
+					@foreach (var i in models)
+					{
+						<option value="@i.Id">
+							@i.Name
+						</option>
+					}
+				</select>
+			</div>
+		}
+		@if (products != null)
+		{
+			<div>
+				<label for="product">Начальные продукты в холодильнике</label>
+				<div>
+					@foreach (var i in products)
+					{
+						<button type="button" name="product" id="product" class="btn btn-secondary my-button" onclick="changeClass(this)">@i.Name</button>
+					}
+				</div>
+			</div>
+		}
+		<div>
+			<button class="btn btn-primary" type="submit">ДОБАВИТЬ</button>
+		</div>
+	</form>
+</body>
+</html>
