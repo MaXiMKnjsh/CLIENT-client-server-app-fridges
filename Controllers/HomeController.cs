@@ -10,13 +10,13 @@ namespace WebApiFridges.CLIENT.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		//private readonly ILogger<HomeController> _logger;
 		private readonly HttpClient _httpClient;
 		private readonly IConfiguration _configuration;
 
-		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+		public HomeController(/*ILogger<HomeController> logger,*/ IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
-			_logger = logger;
+			//_logger = logger;
 			_httpClient = httpClientFactory.CreateClient();
 			_configuration = configuration;
 		}

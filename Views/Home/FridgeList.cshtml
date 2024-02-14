@@ -1,7 +1,6 @@
 ﻿@using WebApiFridges.CLIENT.MyResponceClasses;
 
 @{
-	string url = ViewData["ApiString"] + "/Fridges";
 	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
 }
 
@@ -43,7 +42,6 @@
 				<td>
 					<button class="btn btn-primary" onclick="openModal(
 						{
-						url: '@url',
 						guid: '@item.Guid',
 						name: '@item.Name'
 						})">

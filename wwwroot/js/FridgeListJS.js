@@ -1,11 +1,10 @@
 ﻿function openModal(params) {
-    const url = params.url;
     const guid = params.guid;
     const name = params.name;
     // селектор jQuery
     const modal = $("#modal-confirmation");
 
-    if (url === undefined || guid === undefined) {
+    if (name === undefined || guid === undefined) {
         alert("Произошла ошибка!");
         return;
     }
@@ -26,20 +25,36 @@
     });
 
     buttonRemove.click(function () {
-        removeObject(url, guid, modal);
+        removeObject(guid, modal);
     });
 }
 
-function removeObject(url, guid, modal) {
+function removeObject(guid, modal) {
+    // получаем url на api
+    var connectionString;
+    $.ajax({
+        url: '/staticconfig.json',
+        dataType: 'json',
+        success: function (data) {
+            // Работа с данными из appsettings.json
+            connectionString = data.ConnectionStrings.ApiString;
+        },
+        error: function (response) {
+            alert("Произошла ошибка при чтении статических файлов!");
+            console.log(response);
+            return;
+        }
+    }); // вынеси этот метод в отдельный js файл броу
+
     //метод jQuery для асинхронного http запроса к серверу
     $.ajax({
         type: "DELETE",
-        url: url + "/" + guid,
+        url: connectionString + "/Fridges/" + guid,
         success:
             function (response) {
                 modal.modal("hide");
-                console.log(response);
                 location.reload();
+                console.log(response);
             },
         error:
             function (response) {

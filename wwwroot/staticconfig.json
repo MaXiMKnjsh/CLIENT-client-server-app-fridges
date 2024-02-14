@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "ApiString": "https://localhost:7196/api"
+  }
+}

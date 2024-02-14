@@ -3,6 +3,7 @@
 @{
 	var models = ViewData["ModelsList"] as List<ResponceFridgeModels>;
 	var products = ViewData["ProductsList"] as List<ResponceProducts>;
+	string requestLink = ViewData["ConnectionStrings:ApiString"] + "/Fridges";
 }
 
 <!DOCTYPE html>
@@ -13,19 +14,19 @@
 </head>
 <body>
 	<h3>Заполни форму ниже, чтобы добавить холодильник в список.</h3>
-	<form action="https://localhost:7196/api/Fridges" method="get" class="form-class">
+	<form id="myForm" action="@requestLink" method="post" class="form-class">
 		<div>
-			<label for="description">Название/описание *</label>
-			<input class="form-control" type="text" name="description" id="description" required>
+			<label for="name">Название/описание *</label>
+			<input class="form-control" type="text" name="name" id="name" required>
 		</div>
 		<div>
-			<label for="owner">Владелец</label>
-			<input class="form-control" type="text" name="owner" id="owner">
+			<label for="ownerName">Владелец</label>
+			<input class="form-control" type="text" name="ownerName" id="ownerName">
 		</div>
 		@if (models != null)
 		{
 			<div>
-				<label for="model">Модель холодильника</label>
+				<label for="model">Модель холодильника *</label>
 				<select class="form-control" name="model" id="model" required>
 					@foreach (var i in models)
 					{
