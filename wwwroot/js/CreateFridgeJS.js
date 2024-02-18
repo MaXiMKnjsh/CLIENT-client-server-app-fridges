@@ -10,7 +10,7 @@
 }
 
 
-$('#myForm').submit(function (event) {
+$('#myForm').submit(async function (event) {
     event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
     // Получаем значения элементов формы
@@ -19,38 +19,71 @@ $('#myForm').submit(function (event) {
     const selectedModelGuid = $('#model').val();
 
     // получаем url на api
-    var connectionString;
-    $.ajax({
-        url: '/staticconfig.json',
-        dataType: 'json',
-        success: function (data) {
-            // Работа с данными из appsettings.json
-            connectionString = data.ConnectionStrings.ApiString;
-            SendPostRequest(name, ownerName, selectedModelGuid, connectionString);
-        },
-        error: function (response) {
-            alert("Произошла ошибка при чтении статических файлов!");
-            console.log(response);
-            return;
-        }
-    });
+    const myObj = { connectionString: undefined };
+    if (!(await GetConnectionString(myObj)))
+        return;
+
+    const fridgeGuid = await CreateFridge(name, ownerName, selectedModelGuid, myObj.connectionString);
+    if (fridgeGuid === false) {
+        console.log("Холодильник не был создан!");
+        return;
+    } else { console.log("Холодильник создан!"); }
+
+    if (!(await AddProducts(myObj.connectionString, fridgeGuid))) {
+        console.log("Продукты не были добавлены!");
+        return;
+    } else { console.log("Продукты добавлены!"); }
 });
 
-function SendPostRequest(name, ownerName, selectedModelGuid, connectionString) {
-    // Создаем URL с параметрами
-    var url = connectionString + "/Fridges" + "?name=" + name + "&ownerName=" + ownerName + "&modelGuid=" + selectedModelGuid;
+async function AddProducts(connectionString, fridgeGuid) { // думай как передать сюда список дурачила)))
+    return new Promise((resolve, reject) => {
+        const productsDiv = $('#productsDiv');
+        if (productsDiv.length === 0)
+            resolve(false);
 
-    // Отправляем post-запрос
-    $.ajax({
-        url: url,
-        method: 'POST',
-        success: function (response) {
-            location.reload();
-            console.log(response);
-        },
-        error: function (response) {
-            alert("Произошла ошибка при запросе к серверу!");
-            console.log(response);
-        }
+        const successButtons = $('#productsDiv').find('.btn-success'); // нахожу нажатые кнопки для перебора продуктов из них
+        const productsGuids = [];
+        successButtons.each(function () {
+            const productGuid = $(this).data('guid');
+            productsGuids.push(productGuid);
+        });
+
+        var url = connectionString + "/FridgeProducts/AddProducts?fridgeGuid=" + fridgeGuid;
+
+        var x = JSON.stringify(productsGuids);
+        $.ajax({
+            url: url,
+            method: 'POST',
+            contentType: 'application/json',
+            data: x,
+            success: function () {
+                resolve(true);
+            },
+            error: function (response) {
+                alert("Произошла ошибка при запросе к серверу!");
+                console.log(response);
+                reject(false);
+            }
+        });
+    });
+}
+
+async function CreateFridge(name, ownerName, selectedModelGuid, connectionString) {
+    return new Promise((resolve, reject) => {
+        var url = connectionString + "/Fridges" + "?name=" + name + "&ownerName=" + ownerName + "&modelGuid=" + selectedModelGuid;
+
+        // Отправляем post-запрос
+        $.ajax({ 
+            url: url,
+            method: 'POST',
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (response) {
+                alert("Произошла ошибка при запросе к серверу!");
+                console.log(response);
+                reject(false);
+            }
+        });
     });
 }

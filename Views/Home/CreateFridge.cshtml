@@ -39,12 +39,12 @@
 		}
 		@if (products != null)
 		{
-			<div>
+			<div id="productsDiv">
 				<label for="product">Начальные продукты в холодильнике</label>
 				<div>
 					@foreach (var i in products)
 					{
-						<button type="button" name="product" id="product" class="btn btn-secondary my-button" onclick="changeClass(this)">@i.Name</button>
+						<button type="button" name="product" id="product" data-guid="@i.Id" class="btn btn-secondary my-button" onclick="changeClass(this)">@i.Name</button>
 					}
 				</div>
 			</div>

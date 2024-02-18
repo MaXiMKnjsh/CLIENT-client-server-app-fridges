@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1A/uqIXnMDkeXYyDAX70VUVnD8ou5jzUeeVaCnk2Feo=",
+  "Hash": "LIuFjaRuL5iv65cbPNr/3EFTEud5HvO/SI3BOQQu1u8=",
   "Source": "WebApiFridges.CLIENT",
   "BasePath": "_content/WebApiFridges.CLIENT",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\CommonJS.js",
+      "SourceId": "WebApiFridges.CLIENT",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\",
+      "BasePath": "_content/WebApiFridges.CLIENT",
+      "RelativePath": "js/CommonJS.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\CommonJS.js"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\CreateFridgeJS.js",

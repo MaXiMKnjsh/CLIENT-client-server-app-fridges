@@ -29,27 +29,16 @@
     });
 }
 
-function removeObject(guid, modal) {
-    // получаем url на api
-    var connectionString;
-    $.ajax({
-        url: '/staticconfig.json',
-        dataType: 'json',
-        success: function (data) {
-            // Работа с данными из appsettings.json
-            connectionString = data.ConnectionStrings.ApiString;
-        },
-        error: function (response) {
-            alert("Произошла ошибка при чтении статических файлов!");
-            console.log(response);
-            return;
-        }
-    }); // вынеси этот метод в отдельный js файл броу
+async function removeObject(guid, modal) {
+    const myObj = { connectionString: undefined };
 
-    //метод jQuery для асинхронного http запроса к серверу
+    if (!(await GetConnectionString(myObj)))
+        return;
+
+    //метод jQuery для асинхронного https запроса к серверу
     $.ajax({
         type: "DELETE",
-        url: connectionString + "/Fridges/" + guid,
+        url: myObj.connectionString + "/Fridges/" + guid,
         success:
             function (response) {
                 modal.modal("hide");

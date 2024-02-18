@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\CommonJS.js",
+      "PackagePath": "staticwebassets\\js\\CommonJS.js"
+    },
+    {
       "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\CreateFridgeJS.js",
       "PackagePath": "staticwebassets\\js\\CreateFridgeJS.js"
     },
