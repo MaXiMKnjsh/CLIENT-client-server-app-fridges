@@ -1,7 +1,61 @@
-﻿
+﻿@using WebApiFridges.CLIENT.MyResponceClasses;
+
 @{
-    ViewData["Title"] = "ShowProducts";
+	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
 }
 
-<h1>ShowProducts</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="~/js/ShowProductsJS.js" defer></script>
+</head>
+<body>
+	<h1>Список продуктов</h1>
+	<h6>Выбери холодильник для просмотра его содержимого.</h6>
+	<table id="myTable" class="table">
+		<tr>
+			<th>Модель</th>
+			<th>Год производства</th>
+			<th>Название</th>
+			<th>Владелец</th>
+			<th></th>
+		</tr>
+		@foreach (var item in fridgesList)
+		{
+			<tr>
+				<td>@item.Model</td>
+				<td>@item.Year</td>
+				<td>@item.Name</td>
+				<td>@item.OwnerName</td>
+				<td>
+					<button class="btn btn-primary" onclick="openModal({guid:'@item.Guid'})">
+						Посмотреть
+					</button>
+				</td>
+			</tr>
+		}
+	</table>
 
+	<div class="modal" id="modal-products" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Содержимое холодильника</h5>
+					<button id="buttonClose2" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<ul id="myProductsList">
+						
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button id="buttonClose" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

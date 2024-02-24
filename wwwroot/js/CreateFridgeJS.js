@@ -9,7 +9,6 @@
     }
 }
 
-
 $('#myForm').submit(async function (event) {
     event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
@@ -33,9 +32,11 @@ $('#myForm').submit(async function (event) {
         console.log("Продукты не были добавлены!");
         return;
     } else { console.log("Продукты добавлены!"); }
+
+    location.reload();
 });
 
-async function AddProducts(connectionString, fridgeGuid) { // думай как передать сюда список дурачила)))
+async function AddProducts(connectionString, fridgeGuid) {
     return new Promise((resolve, reject) => {
         const productsDiv = $('#productsDiv');
         if (productsDiv.length === 0)
@@ -50,12 +51,11 @@ async function AddProducts(connectionString, fridgeGuid) { // думай как 
 
         var url = connectionString + "/FridgeProducts/AddProducts?fridgeGuid=" + fridgeGuid;
 
-        var x = JSON.stringify(productsGuids);
         $.ajax({
             url: url,
             method: 'POST',
             contentType: 'application/json',
-            data: x,
+            data: JSON.stringify(productsGuids),
             success: function () {
                 resolve(true);
             },
@@ -73,7 +73,7 @@ async function CreateFridge(name, ownerName, selectedModelGuid, connectionString
         var url = connectionString + "/Fridges" + "?name=" + name + "&ownerName=" + ownerName + "&modelGuid=" + selectedModelGuid;
 
         // Отправляем post-запрос
-        $.ajax({ 
+        $.ajax({
             url: url,
             method: 'POST',
             success: function (data) {

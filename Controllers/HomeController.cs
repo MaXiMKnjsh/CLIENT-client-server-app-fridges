@@ -10,22 +10,14 @@ namespace WebApiFridges.CLIENT.Controllers
 {
 	public class HomeController : Controller
 	{
-		//private readonly ILogger<HomeController> _logger;
 		private readonly HttpClient _httpClient;
 		private readonly IConfiguration _configuration;
 
-		public HomeController(/*ILogger<HomeController> logger,*/ IHttpClientFactory httpClientFactory, IConfiguration configuration)
+		public HomeController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
-			//_logger = logger;
 			_httpClient = httpClientFactory.CreateClient();
 			_configuration = configuration;
 		}
-
-		public IActionResult Index()
-		{
-			return View();
-		}
-
 		private async Task<T> SendHttpRequest<T>(HttpMethod method, string requestUrl)
 		{
 			using HttpRequestMessage request = new HttpRequestMessage(method, requestUrl);
@@ -41,7 +33,6 @@ namespace WebApiFridges.CLIENT.Controllers
 				throw new Exception($"Ошибка при выполнении запроса. Код ошибки: {response.StatusCode}");
 			}
 		}
-
 		public async Task<IActionResult> FridgeList()
 		{
 			ViewData["ApiString"] = _configuration["ConnectionStrings:ApiString"];
@@ -69,11 +60,29 @@ namespace WebApiFridges.CLIENT.Controllers
 
 			return View();
 		}
-		public IActionResult EditFridge()
+		public async Task<IActionResult> EditFridge()
 		{
+			ViewData["ApiString"] = _configuration["ConnectionStrings:ApiString"];
+
+			string requestUrl = _configuration["ConnectionStrings:ApiString"] + "/Fridges"; // запрос на список холоидльников
+			var fridgesList = await SendHttpRequest<List<ResponceFridges>>(HttpMethod.Get, requestUrl);
+
+			ViewData["FridgesList"] = fridgesList;
+
 			return View();
 		}
-		public IActionResult ShowProducts()
+		public async Task<IActionResult> ShowProducts()
+		{
+			ViewData["ApiString"] = _configuration["ConnectionStrings:ApiString"];
+
+			string requestUrl = _configuration["ConnectionStrings:ApiString"] + "/Fridges"; // запрос на список холоидльников
+			var fridgesList = await SendHttpRequest<List<ResponceFridges>>(HttpMethod.Get, requestUrl);
+
+			ViewData["FridgesList"] = fridgesList;
+
+			return View();
+		}
+		public IActionResult Index()
 		{
 			return View();
 		}

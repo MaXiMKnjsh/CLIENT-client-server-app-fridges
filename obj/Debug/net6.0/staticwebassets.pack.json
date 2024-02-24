@@ -21,8 +21,16 @@
       "PackagePath": "staticwebassets\\js\\CreateFridgeJS.js"
     },
     {
+      "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\EditFridge.js",
+      "PackagePath": "staticwebassets\\js\\EditFridge.js"
+    },
+    {
       "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\FridgeListJS.js",
       "PackagePath": "staticwebassets\\js\\FridgeListJS.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\js\\ShowProductsJS.js",
+      "PackagePath": "staticwebassets\\js\\ShowProductsJS.js"
     },
     {
       "Id": "C:\\Users\\User\\Desktop\\copy\\wwwroot\\lib\\bootstrap\\LICENSE",

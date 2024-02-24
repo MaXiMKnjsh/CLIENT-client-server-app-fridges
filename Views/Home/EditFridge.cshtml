@@ -1,7 +1,84 @@
-﻿
+﻿@using WebApiFridges.CLIENT.MyResponceClasses;
+
 @{
-    ViewData["Title"] = "EditFridge";
+	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
 }
 
-<h1>EditFridge</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="~/js/EditFridge.js" defer></script>
+</head>
+<body>
+	<h3>Редактор холодильников</h3>
+	<h6>Выберите холодильник, чтобы изменить информацию о нём.</h6>
+
+	<table id="myTable" class="table">
+		<tr>
+			<th>Модель</th>
+			<th>Год производства</th>
+			<th>Название</th>
+			<th>Владелец</th>
+			<th></th>
+		</tr>
+		@foreach (var item in fridgesList)
+		{
+			<tr>
+				<td>@item.Model</td>
+				<td>@item.Year</td>
+				<td>@item.Name</td>
+				<td>@item.OwnerName</td>
+				<td>
+					<button class="btn btn-primary" onclick="openModal(
+						{
+						guid: '@item.Guid',
+						name: '@item.Name',
+						modelGuid: '@item.ModelGuid',
+						owner: '@item.OwnerName',
+						year: '@item.Year'
+						})">
+						Редактировать
+					</button>
+				</td>
+			</tr>
+		}
+	</table>
+
+	<div class="modal" id="modal-confirmation" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Введите новые данные</h5>
+					<button id="buttonClose2" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<label for="name" class="col-form-label">Название:</label>
+						<input type="text" class="form-control" id="name" name="name">
+					</div>
+					<div>
+						<label for="model" class="col-form-label">Модель:</label>
+						<input type="text" class="form-control" id="model" name="model">
+					</div>
+					<div>
+						<label for="year" class="col-form-label">Год выпуска:</label>
+						<input type="text" class="form-control" id="year" name="year" disabled>
+					</div>
+					<div>
+						<label for="owner" class="col-form-label">Владелец:</label>
+						<input type="text" class="form-control" id="owner" name="owner">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="buttonSave" type="button" class="btn btn-primary">Сохранить</button>
+					<button id="buttonClose" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
 
