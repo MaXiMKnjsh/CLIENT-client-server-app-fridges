@@ -1,37 +1,34 @@
 ﻿function changeClass(button) {
-    if (button.classList.contains('btn-secondary')) {
-        button.classList.remove('btn-secondary');
-        button.classList.add('btn-success');
-    }
-    else {
-        button.classList.remove('btn-success');
-        button.classList.add('btn-secondary');
-    }
+    button.classList.toggle('btn-secondary');
+    button.classList.toggle('btn-success');
 }
 
 $('#myForm').submit(async function (event) {
-    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+    event.preventDefault();
 
-    // Получаем значения элементов формы
     const name = $('#name').val();
     const ownerName = $('#ownerName').val();
     const selectedModelGuid = $('#model').val();
 
-    // получаем url на api
     const myObj = { connectionString: undefined };
-    if (!(await GetConnectionString(myObj)))
+    if (!(await GetConnectionString(myObj))) {
         return;
+    }
 
     const fridgeGuid = await CreateFridge(name, ownerName, selectedModelGuid, myObj.connectionString);
     if (fridgeGuid === false) {
         console.log("Холодильник не был создан!");
         return;
-    } else { console.log("Холодильник создан!"); }
+    } else {
+        console.log("Холодильник создан!");
+    }
 
     if (!(await AddProducts(myObj.connectionString, fridgeGuid))) {
         console.log("Продукты не были добавлены!");
         return;
-    } else { console.log("Продукты добавлены!"); }
+    } else {
+        console.log("Продукты добавлены!");
+    }
 
     location.reload();
 });
@@ -39,17 +36,16 @@ $('#myForm').submit(async function (event) {
 async function AddProducts(connectionString, fridgeGuid) {
     return new Promise((resolve, reject) => {
         const productsDiv = $('#productsDiv');
-        if (productsDiv.length === 0)
+        if (productsDiv.length === 0) {
             resolve(false);
+        }
 
-        const successButtons = $('#productsDiv').find('.btn-success'); // нахожу нажатые кнопки для перебора продуктов из них
-        const productsGuids = [];
-        successButtons.each(function () {
-            const productGuid = $(this).data('guid');
-            productsGuids.push(productGuid);
-        });
+        const successButtons = $('#productsDiv').find('.btn-success');
+        const productsGuids = successButtons.map(function () {
+            return $(this).data('guid');
+        }).get();
 
-        var url = connectionString + "/FridgeProducts/AddProducts?fridgeGuid=" + fridgeGuid;
+        const url = `${connectionString}/FridgeProducts/AddProducts?fridgeGuid=${fridgeGuid}`;
 
         $.ajax({
             url: url,
@@ -70,9 +66,8 @@ async function AddProducts(connectionString, fridgeGuid) {
 
 async function CreateFridge(name, ownerName, selectedModelGuid, connectionString) {
     return new Promise((resolve, reject) => {
-        var url = connectionString + "/Fridges" + "?name=" + name + "&ownerName=" + ownerName + "&modelGuid=" + selectedModelGuid;
+        const url = `${connectionString}/Fridges?name=${name}&ownerName=${ownerName}&modelGuid=${selectedModelGuid}`;
 
-        // Отправляем post-запрос
         $.ajax({
             url: url,
             method: 'POST',

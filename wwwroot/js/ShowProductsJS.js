@@ -1,59 +1,59 @@
 ﻿async function openModal(params) {
     const guid = params.guid;
-    /*const url = params.url;*/
     const modal = $("#modal-products");
 
-    if (guid === undefined /*|| url === undefined*/) {
+    if (guid === undefined) {
         alert("Произошла ошибка!");
         return;
     }
 
-    // получаем url на api
     const myObj = { connectionString: undefined };
-    if (!(await GetConnectionString(myObj)))
+    if (!(await GetConnectionString(myObj))) {
         return;
+    }
 
     $.ajax({
         type: 'GET',
         url: myObj.connectionString + '/FridgeProducts/' + guid,
-        success: function (responce) {
-            let list = document.getElementById('myProductsList');
+        success: function (response) {
+            const list = document.getElementById('myProductsList');
             list.innerHTML = '';
 
-            if (!(responce === undefined)) {
-                responce.forEach(function (item) {
-                    // Создаем элементы и добавляем содержимое полей guid и name
-                    let listItem = document.createElement('li');
-                    listItem.textContent = item.name + ' - ' + item.quantity;
-
-                    // Добавляем элемент в HTML-структуру
+            if (response !== undefined) {
+                response.forEach(function (item) {
+                    const listItem = createListItem(item.name +' - '+ item.quantity);
                     list.appendChild(listItem);
                 });
-            }
-            else {
-                // Создаем элементы и добавляем содержимое полей guid и name
-                let listItem = document.createElement('li');
-                listItem.textContent = 'В холодильнике ничего не содержится!';
-
-                // Добавляем элемент в HTML-структуру
+            } else {
+                const listItem = createListItem('В холодильнике ничего не содержится!');
                 list.appendChild(listItem);
             }
+
             modal.modal('show');
-
-            const buttonClose = modal.find("#buttonClose");
-            const buttonClose2 = modal.find("#buttonClose2");
-
-            buttonClose.click(function () {
-                closeModal(modal);
-            });
-
-            buttonClose2.click(function () {
-                closeModal(modal);
-            });
+            setupCloseButton(modal);
         },
-        error: function (responce) {
-            alert(responce.responseText);
+        error: function (response) {
+            alert(response.responseText);
         }
+    });
+}
+
+function createListItem(text) {
+    const listItem = document.createElement('li');
+    listItem.textContent = text;
+    return listItem;
+}
+
+function setupCloseButton(modal) {
+    const buttonClose = modal.find("#buttonClose");
+    const buttonClose2 = modal.find("#buttonClose2");
+
+    buttonClose.click(function () {
+        closeModal(modal);
+    });
+
+    buttonClose2.click(function () {
+        closeModal(modal);
     });
 }
 

@@ -1,7 +1,27 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="~/js/IndexJS.js" defer></script>
+</head>
+<body>
+	<h3>Информация о проекте:</h3>
+	<h6>Данный проект был реализован для того, чтобы показать навыки умения взаимодействовать с ASP.Net Core Web Api и Web App (model-view-controller) фреймворками.<br/>
+		Также: Entity Framework, unit-tests, MsSQL и прочее.<br />
+		Дополнительная информация:<br />
+	</h6>
+	<a href="https://docs.google.com/document/d/1kzllHyDe7sRJYToVysgUkmCSKkrlPGpS/edit?pli=1">Техническое задание(возможны некоторые несовпадения),</a>
+	<br />
+	<a href="https://github.com/MaXiMKnjsh">Мой гитхаб профиль,</a>
+	<br />
+	<a href="https://github.com/MaXiMKnjsh/CLIENT-client-server-app-fridges">Клиент в виде веб-приложения,</a>
+	<br />
+		<a href="https://github.com/MaXiMKnjsh/webAPI-client-server-app-fridges">АПИ.</a>
+		<br />
+		<div>
+			<h6>Вызов эндпоинта для добавления дефолтного значения в те продукты, где изначально значение не было установлено. </h6>
+		<button onclick="AddDefaultQuantities()" class="btn btn-success my-button">ВЫЗОВ</button>
+	</div>
+</body>
+</html>
 

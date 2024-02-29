@@ -1,4 +1,5 @@
-﻿async function GetConnectionString(myObj) {
+﻿async function GetConnectionString(myObj)
+{
     try {
         const data = await $.ajax({
             url: '/staticconfig.json',

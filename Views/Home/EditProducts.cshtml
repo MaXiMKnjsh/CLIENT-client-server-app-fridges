@@ -1,15 +1,71 @@
-﻿
+﻿@using WebApiFridges.CLIENT.MyResponceClasses;
+
 @{
-    ViewData["Title"] = "EditProducts";
+	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
+	var productsList = ViewData["ProductsList"] as List<ResponceProducts>;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<script src="~/js/EditProductsJS.js" defer></script>
 </head>
 <body>
-	<h1>Список холодильников</h1>
+	<h3>Редактор продуктов</h3>
+	<h6>Выберите холодильник, чтобы изменить информацию о продуктах в нём.</h6>
+
+	<table id="myTable" class="table">
+		<tr>
+			<th>Модель</th>
+			<th>Год производства</th>
+			<th>Название</th>
+			<th>Владелец</th>
+			<th></th>
+		</tr>
+		@foreach (var item in fridgesList)
+		{
+			<tr>
+				<td>@item.Model</td>
+				<td>@item.Year</td>
+				<td>@item.Name</td>
+				<td>@item.OwnerName</td>
+				<td>
+					<button class="btn btn-primary" onclick="openModal('@item.Guid')">
+						Редактировать
+					</button>
+				</td>
+			</tr>
+		}
+	</table>
+
+	<div class="modal" id="modal-editing" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Введите новые данные</h5>
+					<button id="buttonClose2" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="productsDiv">
+						<label for="product">Начальные продукты в холодильнике</label>
+						<div>
+							@foreach (var i in productsList)
+							{
+								<button type="button" name="product" id="product-@i.Id" data-guid="@i.Id" class="btn btn-secondary my-button" onclick="changeClass(this)">@i.Name</button>
+							}
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="buttonSave" type="button" class="btn btn-primary">Сохранить</button>
+					<button id="buttonClose" type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 

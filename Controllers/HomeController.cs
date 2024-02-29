@@ -66,8 +66,11 @@ namespace WebApiFridges.CLIENT.Controllers
 
 			string requestUrl = _configuration["ConnectionStrings:ApiString"] + "/Fridges"; // запрос на список холоидльников
 			var fridgesList = await SendHttpRequest<List<ResponceFridges>>(HttpMethod.Get, requestUrl);
-
 			ViewData["FridgesList"] = fridgesList;
+
+			requestUrl =_configuration["ConnectionStrings:ApiString"] + "/FridgeModels";
+			var models = await SendHttpRequest<List<ResponceFridgeModels>>(HttpMethod.Get, requestUrl);
+			ViewData["ModelsList"] = models;
 
 			return View();
 		}
@@ -86,8 +89,18 @@ namespace WebApiFridges.CLIENT.Controllers
 		{
 			return View();
 		}
-		public IActionResult EditProducts()
+		public async Task<IActionResult> EditProducts()
 		{
+			ViewData["ApiString"] = _configuration["ConnectionStrings:ApiString"];
+
+			string requestUrl = _configuration["ConnectionStrings:ApiString"] + "/Fridges"; // запрос на список холоидльников
+			var fridgesList = await SendHttpRequest<List<ResponceFridges>>(HttpMethod.Get, requestUrl);
+			ViewData["FridgesList"] = fridgesList;
+
+			requestUrl = _configuration["ConnectionStrings:ApiString"] + "/Products";
+			var prods = await SendHttpRequest<List<ResponceProducts>>(HttpMethod.Get, requestUrl);
+			ViewData["ProductsList"] = prods;
+
 			return View();
 		}
 	}

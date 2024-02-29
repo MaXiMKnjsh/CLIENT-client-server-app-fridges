@@ -2,6 +2,7 @@
 
 @{
 	var fridgesList = ViewData["FridgesList"] as List<ResponceFridges>;
+	var models = ViewData["ModelsList"] as List<ResponceFridgeModels>;
 }
 
 <!DOCTYPE html>
@@ -60,8 +61,18 @@
 						<input type="text" class="form-control" id="name" name="name">
 					</div>
 					<div>
-						<label for="model" class="col-form-label">Модель:</label>
-						<input type="text" class="form-control" id="model" name="model">
+						<label for="modelSelect" class="col-form-label">Модель:</label>
+						@if (models != null)
+						{
+							<select class="form-control" name="modelSelect" id="modelSelect" required>
+								@foreach (var i in models)
+								{
+									<option value="@i.Id">
+										@i.Name
+									</option>
+								}
+							</select>
+						}
 					</div>
 					<div>
 						<label for="year" class="col-form-label">Год выпуска:</label>

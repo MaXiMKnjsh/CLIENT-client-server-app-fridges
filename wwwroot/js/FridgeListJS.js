@@ -1,7 +1,6 @@
 ﻿function openModal(params) {
     const guid = params.guid;
     const name = params.name;
-    // селектор jQuery
     const modal = $("#modal-confirmation");
 
     if (name === undefined || guid === undefined) {
@@ -32,28 +31,27 @@
 async function removeObject(guid, modal) {
     const myObj = { connectionString: undefined };
 
-    if (!(await GetConnectionString(myObj)))
+    if (!(await GetConnectionString(myObj))) {
         return;
+    }
 
-    //метод jQuery для асинхронного https запроса к серверу
     $.ajax({
         type: "DELETE",
-        url: myObj.connectionString + "/Fridges/" + guid,
-        success:
-            function (response) {
-                modal.modal("hide");
-                location.reload();
-                console.log(response);
-            },
-        error:
-            function (response) {
-                alert("Произошла ошибка при запросе к серверу!");
-                console.log(response);
-            }
+        url: `${myObj.connectionString}/Fridges/${guid}`,
+        success: function (response) {
+            modal.modal("hide");
+            location.reload();
+            console.log(response);
+        },
+        error: function (response) {
+            alert("Произошла ошибка при запросе к серверу!");
+            console.log(response);
+        }
     });
 
     closeModal(modal);
 }
+
 function closeModal(modal) {
     $(modal).modal('hide');
 }

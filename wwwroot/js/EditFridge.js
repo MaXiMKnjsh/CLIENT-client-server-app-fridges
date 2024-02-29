@@ -1,10 +1,13 @@
 ﻿function openModal(params) {
-    // селектор jQuery
     const modal = $("#modal-confirmation");
 
-    if (params.name === undefined || params.guid === undefined
-        || params.owner === undefined || params.year === undefined
-        || params.modelGuid === undefined) {
+    if (
+        params.name === undefined ||
+        params.guid === undefined ||
+        params.owner === undefined ||
+        params.year === undefined ||
+        params.modelGuid === undefined
+    ) {
         alert("Произошла ошибка!");
         return;
     }
@@ -13,11 +16,18 @@
 
     const fName = modal.find("#name");
     const fYear = modal.find("#year");
-    const fModel = modal.find("#model");
     const fOwner = modal.find("#owner");
 
+    const selectElement = document.getElementById("modelSelect");
+    const desiredValue = params.modelGuid;
+    for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === desiredValue) {
+            selectElement.selectedIndex = i;
+            break;
+        }
+    }
+
     fName.val(params.name);
-    //fModel.val(params.model); сделай список моделей бро
     fYear.val(params.year);
     fOwner.val(params.owner);
 
@@ -34,44 +44,42 @@
     });
 
     buttonSave.click(function () {
-        rewriteObject(params);
+        const newFridgeInfo = {
+            fridgeGuid: params.guid,
+            name: fName.val(),
+            modelGuid: selectElement.value,
+            ownerName: fOwner.val().length > 0 ? fOwner.val() : null
+        };
+        rewriteObject(newFridgeInfo, modal);
     });
 }
 
-async function rewriteObject(params) {
-
+async function rewriteObject(newFridgeInfo, modal) {
     const myObj = { connectionString: undefined };
-    if (!(await GetConnectionString(myObj)))
+
+    if (!(await GetConnectionString(myObj))) {
         return;
+    }
 
-    let newFridgeInfo = {
-        fridgeGuid: params.guid,
-        Name: params.name,
-        ModelGuid:params.modelGuid,
-        OwnerName: params.owner
-    };
-
-    //метод jQuery для асинхронного https запроса к серверу
     $.ajax({
-        type: "PUT",
-        url: myObj.connectionString + "/Fridges",
+        method: "PUT",
+        url: `${myObj.connectionString}/Fridges`,
         contentType: 'application/json',
         data: JSON.stringify(newFridgeInfo),
-        success:
-            function (response) {
-                modal.modal("hide");
-                location.reload();
-                console.log(response);
-            },
-        error:
-            function (response) {
-                alert("Произошла ошибка при запросе к серверу!");
-                console.log(response);
-            }
+        success: function (response) {
+            modal.modal("hide");
+            location.reload();
+            console.log(response);
+        },
+        error: function (response) {
+            alert("Произошла ошибка при запросе к серверу!");
+            console.log(response);
+        }
     });
 
     closeModal(modal);
 }
+
 function closeModal(modal) {
     $(modal).modal('hide');
 }
