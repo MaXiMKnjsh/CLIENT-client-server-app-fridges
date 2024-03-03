@@ -15,22 +15,26 @@ $('#myForm').submit(async function (event) {
         return;
     }
 
-    const fridgeGuid = await CreateFridge(name, ownerName, selectedModelGuid, myObj.connectionString);
-    if (fridgeGuid === false) {
-        console.log("Холодильник не был создан!");
-        return;
-    } else {
+    try {
+        const fridgeGuid = await CreateFridge(name, ownerName, selectedModelGuid, myObj.connectionString);
+        if (fridgeGuid === false) {
+            console.log("Холодильник не был создан!");
+            return;
+        }
+
         console.log("Холодильник создан!");
-    }
 
-    if (!(await AddProducts(myObj.connectionString, fridgeGuid))) {
-        console.log("Продукты не были добавлены!");
-        return;
-    } else {
+        if (!(await AddProducts(myObj.connectionString, fridgeGuid))) {
+            console.log("Продукты не были добавлены!");
+            return;
+        }
+
         console.log("Продукты добавлены!");
+        location.reload();
+    } catch (error) {
+        console.log(error);
     }
 
-    location.reload();
 });
 
 async function AddProducts(connectionString, fridgeGuid) {

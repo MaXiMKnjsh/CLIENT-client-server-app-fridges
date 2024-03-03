@@ -22,20 +22,29 @@
 			<th>Название</th>
 			<th>Владелец</th>
 			<th></th>
+			<th></th>
 		</tr>
-		@foreach (var item in fridgesList)
+		@if (fridgesList != null)
 		{
-			<tr>
-				<td>@item.Model</td>
-				<td>@item.Year</td>
-				<td>@item.Name</td>
-				<td>@item.OwnerName</td>
-				<td>
-					<button class="btn btn-primary" onclick="openModal('@item.Guid')">
-						Редактировать
-					</button>
-				</td>
-			</tr>
+			@foreach (var fridge in fridgesList)
+			{
+				<tr>
+					<td>@fridge.Model</td>
+					<td>@fridge.Year</td>
+					<td>@fridge.Name</td>
+					<td>@fridge.OwnerName</td>
+					<td>
+						<button class="btn btn-primary" onclick="openModalSet('@fridge.Guid')">
+							Ред. набор
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-primary" onclick="openModalCount('@fridge.Guid')">
+							Ред. кол-во
+						</button>
+					</td>
+				</tr>
+			}
 		}
 	</table>
 
@@ -50,11 +59,14 @@
 				</div>
 				<div class="modal-body">
 					<div id="productsDiv">
-						<label for="product">Начальные продукты в холодильнике</label>
+						<label for="product">Продукты в холодильнике:</label>
 						<div>
-							@foreach (var i in productsList)
+							@if (productsList != null)
 							{
-								<button type="button" name="product" id="product-@i.Id" data-guid="@i.Id" class="btn btn-secondary my-button" onclick="changeClass(this)">@i.Name</button>
+								@foreach (var product in productsList)
+								{
+									<button type="button" name="product" id="product-@product.Id" data-guid="@product.Id" class="btn btn-secondary my-button" onclick="changeClass(this)">@product.Name</button>
+								}
 							}
 						</div>
 					</div>

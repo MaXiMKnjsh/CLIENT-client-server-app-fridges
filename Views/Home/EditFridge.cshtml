@@ -23,15 +23,17 @@
 			<th>Владелец</th>
 			<th></th>
 		</tr>
-		@foreach (var item in fridgesList)
+		@if (fridgesList != null)
 		{
-			<tr>
-				<td>@item.Model</td>
-				<td>@item.Year</td>
-				<td>@item.Name</td>
-				<td>@item.OwnerName</td>
-				<td>
-					<button class="btn btn-primary" onclick="openModal(
+			@foreach (var item in fridgesList)
+			{
+				<tr>
+					<td>@item.Model</td>
+					<td>@item.Year</td>
+					<td>@item.Name</td>
+					<td>@item.OwnerName</td>
+					<td>
+						<button class="btn btn-primary" onclick="openModal(
 						{
 						guid: '@item.Guid',
 						name: '@item.Name',
@@ -39,10 +41,11 @@
 						owner: '@item.OwnerName',
 						year: '@item.Year'
 						})">
-						Редактировать
-					</button>
-				</td>
-			</tr>
+							Редактировать
+						</button>
+					</td>
+				</tr>
+			}
 		}
 	</table>
 
