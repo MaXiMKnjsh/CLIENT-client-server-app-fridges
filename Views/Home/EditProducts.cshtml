@@ -22,7 +22,6 @@
 			<th>Название</th>
 			<th>Владелец</th>
 			<th></th>
-			<th></th>
 		</tr>
 		@if (fridgesList != null)
 		{
@@ -34,13 +33,8 @@
 					<td>@fridge.Name</td>
 					<td>@fridge.OwnerName</td>
 					<td>
-						<button class="btn btn-primary" onclick="openModalSet('@fridge.Guid')">
-							Ред. набор
-						</button>
-					</td>
-					<td>
-						<button class="btn btn-primary" onclick="openModalCount('@fridge.Guid')">
-							Ред. кол-во
+						<button class="btn btn-primary" onclick="openModal('@fridge.Guid')">
+							Редактировать
 						</button>
 					</td>
 				</tr>
@@ -65,7 +59,10 @@
 							{
 								@foreach (var product in productsList)
 								{
-									<button type="button" name="product" id="product-@product.Id" data-guid="@product.Id" class="btn btn-secondary my-button" onclick="changeClass(this)">@product.Name</button>
+									<div id="div-@product.Id" class="form-group d-flex align-items-center" data-guid="@product.Id">
+										<button id="button-@product.Id" type="button" name="product" class="btn btn-secondary my-button" onclick="changeClass(this)" data-guid="@product.Id">@product.Name</button>
+										<input id="input-@product.Id" type="text" class="form-control ml-2" placeholder="Кол-во" value="0">
+									</div>
 								}
 							}
 						</div>
