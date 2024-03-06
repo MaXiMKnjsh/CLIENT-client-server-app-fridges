@@ -111,7 +111,7 @@ function attachEventHandlers() {
 
     buttonSave.click(function () {
         const productsList =[];
-        const productDivs = document.querySelectorAll("#productsDiv div");
+        const productDivs = document.querySelectorAll("#productsDiv div[data-guid]");
         productDivs.forEach(function (productDiv) {
             const buttonElement = productDiv.querySelector("button.btn-success");
             const inputElement = productDiv.querySelector("input");
